@@ -1,60 +1,68 @@
-export default function Footer() {
+// components/Footer.tsx
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { Github, Linkedin, Mail } from "lucide-react";
+
+export default function Footer(): JSX.Element {
+  const year = new Date().getFullYear();
+
   return (
     <footer
-      className="
-        border-t border-white/10 
-        mt-32 
-        bg-black/40 backdrop-blur-xl
-      "
+      role="contentinfo"
+      className="border-t border-white/10 mt-20 bg-black/40 backdrop-blur-xl"
     >
-      <div
-        className="
-          container-custom 
-          py-10 
-          text-sm 
-          text-zinc-400 
-          flex flex-col md:flex-row 
-          items-center justify-between 
-          gap-4
-        "
-      >
-        {/* LEFT SIDE — LOGO + COPYRIGHT */}
+      <div className="container-custom py-8 text-sm text-zinc-400 flex flex-col md:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <img
+          <Image
             src="/logo.svg"
-            alt="Logo"
+            alt="Tomás Urbano logo"
+            width={96}
+            height={24}
             className="h-6 w-auto opacity-80"
+            priority={false}
           />
           <p className="text-zinc-500">
-            © 2026 Tomás — Full‑Stack Developer
+            © {year} <span className="text-zinc-200">Tomás Urbano</span> — Full‑Stack Developer
           </p>
         </div>
 
-        {/* RIGHT SIDE — LINKS */}
-        <div className="flex gap-6">
-          <a
+        <nav aria-label="Footer" className="flex items-center gap-6">
+          <Link
             href="https://github.com/TomasUrbano1"
             target="_blank"
-            className="hover:text-white transition-colors duration-300"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
+            aria-label="GitHub — abre en una nueva pestaña"
           >
-            GitHub
-          </a>
+            <Github className="h-4 w-4" />
+            <span className="sr-only">GitHub</span>
+            <span aria-hidden className="hidden sm:inline">GitHub</span>
+          </Link>
 
-          <a
+          <Link
             href="https://linkedin.com/in/tomas-urbano"
             target="_blank"
-            className="hover:text-white transition-colors duration-300"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
+            aria-label="LinkedIn — abre en una nueva pestaña"
           >
-            LinkedIn
-          </a>
+            <Linkedin className="h-4 w-4" />
+            <span className="sr-only">LinkedIn</span>
+            <span aria-hidden className="hidden sm:inline">LinkedIn</span>
+          </Link>
 
           <a
             href="mailto:toomas.urbano14@gmail.com"
-            className="hover:text-white transition-colors duration-300"
+            className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
+            aria-label="Enviar email a Tomás"
           >
-            Email
+            <Mail className="h-4 w-4" />
+            <span className="sr-only">Email</span>
+            <span aria-hidden className="hidden sm:inline">Email</span>
           </a>
-        </div>
+        </nav>
       </div>
     </footer>
   );
