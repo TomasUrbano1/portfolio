@@ -1,8 +1,9 @@
 // components/Section.tsx
 "use client";
 
-import React from "react";
+import React, { useContext } from "react";
 import FadeIn from "@/components/FadeIn";
+import { LanguageContext } from "@/app/layout";
 
 type SectionProps = {
   id?: string;
@@ -21,7 +22,10 @@ export default function Section({
   className = "",
   hideDivider = false,
 }: SectionProps): JSX.Element {
-  const headingId = id ?? (title ? `section-${title.replace(/\s+/g, "-").toLowerCase()}` : undefined);
+  const { lang } = useContext(LanguageContext);
+
+  const headingId =
+    id ?? (title ? `section-${title.replace(/\s+/g, "-").toLowerCase()}` : undefined);
 
   return (
     <section

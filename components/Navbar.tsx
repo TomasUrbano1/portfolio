@@ -4,9 +4,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useContext } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { LanguageContext } from "@/app/layout";
 
 export default function Navbar(): JSX.Element {
   const pathname = usePathname() ?? "/";
@@ -16,11 +17,14 @@ export default function Navbar(): JSX.Element {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const prefersReducedMotion = useReducedMotion();
 
+  // idioma
+  const { lang, setLang } = useContext(LanguageContext);
+
   const links = [
-    { href: "/", label: "Home" },
-    { href: "/projects", label: "Projects" },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: lang === "en" ? "Home" : "Inicio" },
+    { href: "/projects", label: lang === "en" ? "Projects" : "Proyectos" },
+    { href: "/about", label: lang === "en" ? "About" : "Sobre mí" },
+    { href: "/contact", label: lang === "en" ? "Contact" : "Contacto" },
   ];
 
   useEffect(() => {
@@ -38,7 +42,6 @@ export default function Navbar(): JSX.Element {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") setOpen(false);
       if (e.key === "Tab" && open && menuRef.current) {
-        // Basic focus trap: keep focus inside the menu
         const focusable = menuRef.current.querySelectorAll<HTMLElement>(
           'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])'
         );
@@ -58,7 +61,6 @@ export default function Navbar(): JSX.Element {
     if (open) {
       document.body.style.overflow = "hidden";
       document.addEventListener("keydown", onKey);
-      // focus first link for keyboard users
       setTimeout(() => firstLinkRef.current?.focus(), 50);
     } else {
       document.body.style.overflow = "";
@@ -117,6 +119,7 @@ export default function Navbar(): JSX.Element {
           </span>
         </Link>
 
+        {/* DESKTOP LINKS */}
         <div className="hidden md:flex items-center gap-6 text-sm" role="menubar">
           {links.map(({ href, label }) => {
             const active = pathname === href;
@@ -134,18 +137,19 @@ export default function Navbar(): JSX.Element {
               </Link>
             );
           })}
+
+          {/* SELECTOR DE IDIOMA */}
+          <button
+            onClick={() => setLang(lang === "en" ? "es" : "en")}
+            className="ml-4 text-zinc-400 hover:text-white transition-colors px-2 py-1"
+            aria-label="Cambiar idioma"
+          >
+            {lang === "en" ? "ES" : "EN"}
+          </button>
         </div>
 
+        {/* MOBILE BUTTON */}
         <div className="md:hidden flex items-center gap-3">
-          <Link
-            href="/contact"
-            className="hidden sm:inline-flex items-center rounded-lg bg-white text-black px-3 py-2 text-sm font-medium
-                       hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 transition"
-            aria-label="Contactar a Tomás"
-          >
-            Contact
-          </Link>
-
           <button
             onClick={() => setOpen((s) => !s)}
             aria-expanded={open}
@@ -159,6 +163,7 @@ export default function Navbar(): JSX.Element {
         </div>
       </nav>
 
+      {/* MOBILE MENU */}
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
@@ -193,14 +198,13 @@ export default function Navbar(): JSX.Element {
                   );
                 })}
 
-                <Link
-                  href="/contact"
-                  className="mt-2 inline-flex items-center justify-center rounded-lg bg-white text-black px-4 py-2 text-sm font-medium
-                             hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 transition"
-                  aria-label="Contactar a Tomás"
+                {/* SELECTOR DE IDIOMA MOBILE */}
+                <button
+                  onClick={() => setLang(lang === "en" ? "es" : "en")}
+                  className="mt-2 inline-flex items-center justify-center rounded-md px-3 py-2 text-sm text-zinc-300 hover:text-white hover:bg-white/3"
                 >
-                  Contact
-                </Link>
+                  {lang === "en" ? "Español" : "English"}
+                </button>
               </div>
             </div>
           </motion.div>

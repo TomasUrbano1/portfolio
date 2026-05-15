@@ -4,9 +4,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
+import { useContext } from "react";
+import { LanguageContext } from "@/app/layout";
 
 export default function Footer(): JSX.Element {
   const year = new Date().getFullYear();
+  const { lang } = useContext(LanguageContext);
+
+  const t = {
+    developer: lang === "en" ? "Full‑Stack Developer" : "Desarrollador Full‑Stack",
+    github: "GitHub",
+    linkedin: "LinkedIn",
+    email: lang === "en" ? "Send email to Tomás" : "Enviar email a Tomás",
+  };
 
   return (
     <footer
@@ -24,7 +34,7 @@ export default function Footer(): JSX.Element {
             priority={false}
           />
           <p className="text-zinc-500">
-            © {year} <span className="text-zinc-200">Tomás Urbano</span> — Full‑Stack Developer
+            © {year} <span className="text-zinc-200">Tomás Urbano</span> — {t.developer}
           </p>
         </div>
 
@@ -34,11 +44,11 @@ export default function Footer(): JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
-            aria-label="GitHub — abre en una nueva pestaña"
+            aria-label="GitHub — opens in a new tab"
           >
             <Github className="h-4 w-4" />
-            <span className="sr-only">GitHub</span>
-            <span aria-hidden className="hidden sm:inline">GitHub</span>
+            <span className="sr-only">{t.github}</span>
+            <span aria-hidden className="hidden sm:inline">{t.github}</span>
           </Link>
 
           <Link
@@ -46,17 +56,17 @@ export default function Footer(): JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
-            aria-label="LinkedIn — abre en una nueva pestaña"
+            aria-label="LinkedIn — opens in a new tab"
           >
             <Linkedin className="h-4 w-4" />
-            <span className="sr-only">LinkedIn</span>
-            <span aria-hidden className="hidden sm:inline">LinkedIn</span>
+            <span className="sr-only">{t.linkedin}</span>
+            <span aria-hidden className="hidden sm:inline">{t.linkedin}</span>
           </Link>
 
           <a
             href="mailto:toomas.urbano14@gmail.com"
             className="inline-flex items-center gap-2 hover:text-white transition-colors duration-200"
-            aria-label="Enviar email a Tomás"
+            aria-label={t.email}
           >
             <Mail className="h-4 w-4" />
             <span className="sr-only">Email</span>

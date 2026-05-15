@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { useContext } from "react";
+import { LanguageContext } from "@/app/layout";
 
 type ProjectCardProps = {
   title: string;
@@ -21,6 +23,20 @@ export default function ProjectCard({
   href,
   image,
 }: ProjectCardProps) {
+  const { lang } = useContext(LanguageContext);
+
+  const t = {
+    view: lang === "en" ? "View Project" : "Ver Proyecto",
+    openNewTab:
+      lang === "en"
+        ? `Open ${title} in a new tab`
+        : `Abrir ${title} en una nueva pestaña`,
+    viewPage:
+      lang === "en"
+        ? `View ${title} project page`
+        : `Ver página del proyecto ${title}`,
+  };
+
   const isExternal = href.startsWith("http");
 
   const CardInner = (
@@ -77,15 +93,6 @@ export default function ProjectCard({
           </span>
         ))}
       </div>
-
-      {/* CTA */}
-      <div>
-        <span className="inline-flex rounded-xl bg-white text-black px-4 py-2 text-sm font-medium
-                         hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30
-                         transition-transform duration-200">
-          {/* The actual link element is rendered outside to keep semantics correct */}
-        </span>
-      </div>
     </>
   );
 
@@ -102,26 +109,26 @@ export default function ProjectCard({
           target="_blank"
           rel="noopener noreferrer"
           className="block"
-          aria-label={`Open ${title} in a new tab`}
+          aria-label={t.openNewTab}
         >
           {CardInner}
           <div className="mt-3 flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-xl bg-white text-black px-4 py-2 text-sm font-medium
                              hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30
                              transition-transform duration-200">
-              View Project
+              {t.view}
               <ArrowRight size={16} className="text-zinc-600" />
             </span>
           </div>
         </a>
       ) : (
-        <Link href={href} className="block" aria-label={`View ${title} project page`}>
+        <Link href={href} className="block" aria-label={t.viewPage}>
           {CardInner}
           <div className="mt-3 flex items-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-xl bg-white text-black px-4 py-2 text-sm font-medium
                              hover:bg-white/95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30
                              transition-transform duration-200">
-              View Project
+              {t.view}
               <ArrowRight size={16} className="text-zinc-600" />
             </span>
           </div>

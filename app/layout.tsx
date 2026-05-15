@@ -1,19 +1,23 @@
 // app/layout.tsx
-import type { Metadata } from "next";
+"use client";
+
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { createContext, useState } from "react";
 
-export const metadata: Metadata = {
+export const metadata = {
   title: "Tomás Urbano — Full‑Stack Developer",
   description:
     "Building real-world web applications with Next.js, Supabase and PostgreSQL.",
   metadataBase: new URL("https://tomasurbano.vercel.app"),
+
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
     apple: "/apple-touch-icon.png",
   },
+
   openGraph: {
     title: "Tomás Urbano — Full‑Stack Developer",
     description: "Modern full‑stack developer portfolio built with Next.js.",
@@ -29,6 +33,7 @@ export const metadata: Metadata = {
     ],
     type: "website",
   },
+
   twitter: {
     card: "summary_large_image",
     title: "Tomás Urbano — Full‑Stack Developer",
@@ -36,42 +41,59 @@ export const metadata: Metadata = {
       "Building real-world web applications with Next.js and Supabase.",
     images: ["/og-image.png"],
   },
+
   themeColor: "#000000",
 };
 
+// Contexto de idioma para toda la app
+interface LanguageContextType {
+  lang: "en" | "es";
+  setLang: React.Dispatch<React.SetStateAction<"en" | "es">>;
+}
+
+export const LanguageContext = createContext<LanguageContextType>({
+  lang: "en",
+  setLang: () => {},
+});
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
+}) {
+  const [lang, setLang] = useState<"en" | "es">("en");
+
   return (
-    <html lang="en" className="dark">
+    <html lang={lang} className="dark">
       <head>
-        {/* Preload critical assets */}
-        <link rel="preload" href="/logo.svg" as="image" type="image/svg+xml" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {/* Favicons */}
+        {/* PRELOAD DEL LOGO PARA PERFORMANCE */}
+        <link
+          rel="preload"
+          href="/logo.svg"
+          as="image"
+          type="image/svg+xml"
+        />
+
+        {/* FAVICON */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       </head>
 
-      <body className="bg-black text-white antialiased selection:bg-white/20 min-h-screen flex flex-col">
-        {/* Skip link for keyboard users */}
-        <a
-          href="#content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50
-                     bg-white text-black px-3 py-2 rounded-md"
-        >
-          Skip to content
-        </a>
+      <body
+        className="
+          bg-black text-white 
+          antialiased 
+          selection:bg-white/20 
+          min-h-screen 
+          flex flex-col
+        "
+      >
+        <LanguageContext.Provider value={{ lang, setLang }}>
+          <Navbar />
 
-        <Navbar />
+          <main className="flex-1 pt-20">{children}</main>
 
-        <main id="content" className="flex-1 pt-20">
-          {children}
-        </main>
-
-        <Footer />
+          <Footer />
+        </LanguageContext.Provider>
       </body>
     </html>
   );
