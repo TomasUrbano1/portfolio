@@ -144,7 +144,7 @@ export default function HomePage(): JSX.Element {
             }
             stack={["Next.js", "Supabase", "PostgreSQL", "Tailwind"]}
             href="/projects/ronda"
-            image="/projects/ronda.jpg"
+            image="/ronda.jpg"
           />
 
           <ProjectCard
