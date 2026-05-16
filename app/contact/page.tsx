@@ -2,7 +2,7 @@
 
 import FadeIn from "@/components/FadeIn";
 import { useState, useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 export default function ContactPage() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");

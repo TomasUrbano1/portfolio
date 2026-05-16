@@ -3,7 +3,7 @@
 
 import React, { useContext } from "react";
 import FadeIn from "@/components/FadeIn";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 type SectionProps = {
   id?: string;

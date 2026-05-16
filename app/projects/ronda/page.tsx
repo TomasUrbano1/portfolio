@@ -4,7 +4,7 @@ import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import { Check, ArrowRight } from "lucide-react";
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 const PROJECT_NAME = "Ronda Market";
 const LIVE_URL = "https://ronda-market.vercel.app";

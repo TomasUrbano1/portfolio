@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, useContext } from "react";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 export default function Navbar(): JSX.Element {
   const pathname = usePathname() ?? "/";

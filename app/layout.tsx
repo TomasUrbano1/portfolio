@@ -1,10 +1,7 @@
-// app/layout.tsx
-"use client";
-
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { createContext, useState } from "react";
+import LanguageProvider from "./LanguageProvider";
 
 export const metadata = {
   title: "Tomás Urbano — Full‑Stack Developer",
@@ -45,25 +42,13 @@ export const metadata = {
   themeColor: "#000000",
 };
 
-// Contexto de idioma para toda la app
-interface LanguageContextType {
-  lang: "en" | "es";
-  setLang: React.Dispatch<React.SetStateAction<"en" | "es">>;
-}
-
-export const LanguageContext = createContext<LanguageContextType>({
-  lang: "en",
-  setLang: () => {},
-});
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [lang, setLang] = useState<"en" | "es">("en");
-
   return (
-    <html lang={lang} className="dark">
+    <html lang="en" className="dark">
       <head>
         {/* PRELOAD DEL LOGO PARA PERFORMANCE */}
         <link
@@ -87,13 +72,13 @@ export default function RootLayout({
           flex flex-col
         "
       >
-        <LanguageContext.Provider value={{ lang, setLang }}>
+        <LanguageProvider>
           <Navbar />
 
           <main className="flex-1 pt-20">{children}</main>
 
           <Footer />
-        </LanguageContext.Provider>
+        </LanguageProvider>
       </body>
     </html>
   );

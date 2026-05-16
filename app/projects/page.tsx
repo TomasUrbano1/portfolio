@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 import ProjectCard from "@/components/ProjectCard";
 
 export default function ProjectsPage() {

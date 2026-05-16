@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 export default function Footer(): JSX.Element {
   const year = new Date().getFullYear();

@@ -4,7 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 import { Code2, Database, Server, Braces } from "lucide-react";
 import ProjectCard from "@/components/ProjectCard";
 import Section from "@/components/Section";

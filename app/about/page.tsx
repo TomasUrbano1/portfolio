@@ -2,7 +2,7 @@
 
 import FadeIn from "@/components/FadeIn";
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 export default function AboutPage() {
   const { lang } = useContext(LanguageContext);

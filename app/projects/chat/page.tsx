@@ -4,7 +4,7 @@ import FadeIn from "@/components/FadeIn";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { useContext } from "react";
-import { LanguageContext } from "@/app/layout";
+import { LanguageContext } from "@/app/LanguageProvider";
 
 const PROJECT_NAME = "MercadoChat";
 
