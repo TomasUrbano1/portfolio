@@ -12,7 +12,11 @@ export const LanguageContext = createContext<LanguageContextType>({
   setLang: () => {},
 });
 
-export default function LanguageProvider({ children }: { children: React.ReactNode }) {
+export default function LanguageProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [lang, setLang] = useState<"en" | "es">("en");
 
   return (
