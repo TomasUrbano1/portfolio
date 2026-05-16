@@ -115,7 +115,7 @@ export default function HomePage(): JSX.Element {
             <div className="flex justify-center md:justify-end">
               <div className="relative w-56 h-56 md:w-72 md:h-72 rounded-2xl overflow-hidden shadow-xl shadow-black/40">
                 <Image
-                  src="/tomas-hero.png" // guardá tu foto como /public/tomas-hero.png
+                  src="/portrait.jpg" // 
                   alt="Tomás Urbano portrait"
                   fill
                   className="object-cover"
@@ -144,7 +144,7 @@ export default function HomePage(): JSX.Element {
             }
             stack={["Next.js", "Supabase", "PostgreSQL", "Tailwind"]}
             href="/projects/ronda"
-            image="/projects/ronda-preview.png"
+            image="/projects/ronda.jpg"
           />
 
           <ProjectCard
