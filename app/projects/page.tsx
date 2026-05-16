@@ -29,6 +29,7 @@ export default function ProjectsPage() {
           description={t.rondaDesc}
           stack={["Next.js", "Supabase", "PostgreSQL", "TypeScript"]}
           href="/projects/ronda"
+          image="/ronda.jpg"   // 👈 agregado
         />
 
         <ProjectCard
@@ -36,6 +37,7 @@ export default function ProjectsPage() {
           description={t.chatDesc}
           stack={["Next.js", "Supabase", "Tailwind CSS", "TypeScript"]}
           href="/projects/chat"
+          image="/mercadochat.jpg"   // 👈 si no existe, podés borrarlo
         />
       </div>
     </section>
